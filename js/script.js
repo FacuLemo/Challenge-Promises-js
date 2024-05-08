@@ -25,18 +25,17 @@ const agregarJugador = async () => {
         if (jugadorExistente) {
             throw new Error('El jugador ya está en el equipo.');
         }
-
-        // Agregar el nuevo jugador al array de jugadores
+        if( nombre.length == 0 || edad.length == 0 || posicion.length == 0){
+            throw new Error('Complete todos los campos para registrar un jugador nuevo.')
+        }
         jugadores.push({ nombre, edad, posicion });
-
-        // Guardar los jugadores actualizados en el localStorage
+        console.log(jugadores)
         guardarJugadoresLocalStorage(jugadores);
 
         // Simular una demora de 1 segundo para la operación asíncrona
         await new Promise(resolve => setTimeout(resolve, 1000));
-
-        // Mostrar un mensaje de éxito
         alert('Jugador agregado correctamente.');
+
     } catch (error) {
         console.error('Error:', error.message);
     }
@@ -45,6 +44,17 @@ const agregarJugador = async () => {
 
 // Función asíncrona para listar todos los jugadores del equipo
 const listarJugadores = async () => {
+    let jugadores_html = ""
+    let jugadores = obtenerJugadoresLocalStorage()
+    jugadores.forEach((jugador) => {
+            jugadores_html += `
+            <div class="card mx-2 text-center" style="width: 200px;">
+            <p class="card-title" >${jugador.nombre}</p>
+            <p class="card-subtitle text-muted">${jugador.posicion}</p>
+            <p class="card-subtitle mb-2 text-muted">${jugador.edad}</p>
+            </div>`;
+    });
+    document.getElementById("div-jugadores").innerHTML = jugadores_html;
     // Implementación para listar todos los jugadores
 };
 
