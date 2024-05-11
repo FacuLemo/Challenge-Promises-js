@@ -11,16 +11,18 @@
 </head>
 
 <body>
-    <div>
-        <h1>Gestor de equipo de fútbol</h1>
+    <div class="container text-center">
+        <div >
+            <h1>Gestor de equipo de fútbol</h1>
+        </div>
+        <div>
+            <button class="btn btn-primary" onclick="agregarJugador()">Agregar jugador</button>
+            <button class="btn btn-primary" onclick="listarJugadores()">Listar jugadores</button>
+            <button class="btn btn-primary" onclick="asignarPosicion()">Asignar posición</button>
+            <button class="btn btn-primary" onclick="realizarCambio()">Realizar cambio durante el partido</button>
+        </div>
     </div>
-    <div>
-        <button class="btn btn-primary" onclick="agregarJugador()">Agregar jugador</button>
-        <button class="btn btn-primary" onclick="listarJugadores()">Listar jugadores</button>
-        <button class="btn btn-primary" onclick="asignarPosicion()">Asignar posición</button>
-        <button class="btn btn-primary" onclick="realizarCambio()">Realizar cambio durante el partido</button>
-    </div>
-    <div class="d-flex justify-content-evenly my-3" id="div-jugadores">
+    <div class="d-flex flex-wrap justify-content-evenly my-3" id="div-jugadores">
         <!-- TODO: Flex que baje automaticamente -->
     </div>
     <!-- Proyect scripts -->

@@ -41,26 +41,35 @@ const agregarJugador = async () => {
     }
 };
 
-
 // Función asíncrona para listar todos los jugadores del equipo
 const listarJugadores = async () => {
     let jugadores_html = ""
     let jugadores = obtenerJugadoresLocalStorage()
-    jugadores.forEach((jugador) => {
+    jugadores.forEach((j) => {
             jugadores_html += `
-            <div class="card mx-2 text-center" style="width: 200px;">
-            <p class="card-title" >${jugador.nombre}</p>
-            <p class="card-subtitle text-muted">${jugador.posicion}</p>
-            <p class="card-subtitle mb-2 text-muted">${jugador.edad}</p>
-            </div>`;
+            <div class="card m-2 text-center" style="width: 200px;">
+                <p class="card-title" >${j.nombre}</p>
+                <p class="card-subtitle text-muted">${j.posicion}</p>
+                <p class="card-subtitle mb-2 text-muted">${j.edad}</p>
+                <p class="btn btn-primary m-3" onclick="asignarPosicion('${j.nombre}')">Cambiar Posición</p>
+                </div>`;
     });
     document.getElementById("div-jugadores").innerHTML = jugadores_html;
     // Implementación para listar todos los jugadores
 };
 
 // Función asíncrona para asignar una nueva posición a un jugador
-const asignarPosicion = async (nombreJugador, nuevaPosicion) => {
-    // Implementación para asignar una nueva posición a un jugador
+const asignarPosicion = async (nombreJugador) => {
+    const nuevaPos = prompt(`Ingrese la nueva posición de ${nombreJugador}:`);
+    let jugadores = obtenerJugadoresLocalStorage()
+    let jugadoresActualizado = jugadores.map( (j) => {
+        if (j.nombre == nombreJugador) {
+            return { ...j, posicion: nuevaPos };
+        }
+        return j;
+    })
+    guardarJugadoresLocalStorage(jugadoresActualizado);
+    listarJugadores()
 };
 
 // Función asíncrona para realizar un cambio durante un partido
